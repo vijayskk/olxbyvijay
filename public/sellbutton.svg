@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="30"
+   height="15"
+   viewBox="0 0 7.9374998 3.9687502"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.0.2 (e86c870879, 2021-01-15)"
+   sodipodi:docname="sellbutton.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="8"
+     inkscape:cx="30.861312"
+     inkscape:cy="-6.3407978"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     units="px"
+     inkscape:window-width="1514"
+     inkscape:window-height="954"
+     inkscape:window-x="50"
+     inkscape:window-y="27"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g56"
+       transform="matrix(1.0459085,0,0,1.0463232,-0.10426063,-1.0449313)">
+      <g
+         id="g47"
+         transform="matrix(1.1348846,0,0,0.92538681,-0.48976631,-0.2046207)">
+        <path
+           id="path10"
+           style="fill:#000000;fill-rule:evenodd;stroke-width:1.13559"
+           d="m 7.4277344,6.6328125 a 4.9903737,6.144813 0 0 0 -4.9921875,6.1464845 4.9903737,6.144813 0 0 0 4.8183593,6.140625 v 0.0059 H 21.746094 a 4.9903737,6.144813 0 0 0 0.0078,0 4.9903737,6.144813 0 0 0 4.992188,-6.148437 4.9903737,6.144813 0 0 0 -4.992188,-6.1445315 4.9903737,6.144813 0 0 0 -0.144531,0.00586 H 7.6171875 a 4.9903737,6.144813 0 0 0 -0.1894531,-0.0059 z M 7.859375,7.25 A 4.6795918,5.5184016 0 0 1 8.0371094,7.25391 H 21.15625 A 4.6795918,5.5184016 0 0 1 21.292969,7.25 a 4.6795918,5.5184016 0 0 1 4.68164,5.519531 4.6795918,5.5184016 0 0 1 -4.68164,5.519531 4.6795918,5.5184016 0 0 1 -0.0059,0 H 7.6953125 v -0.0039 A 4.6795918,5.5184016 0 0 1 3.1777344,12.769531 4.6795918,5.5184016 0 0 1 7.859375,7.25 Z"
+           transform="scale(0.26458333)" />
+        <path
+           id="path26"
+           style="fill:#ff00ff;fill-rule:evenodd;stroke-width:1.13559"
+           d="m 7.4277344,6.6328125 a 4.9903737,6.144813 0 0 0 -4.9921875,6.1464845 4.9903737,6.144813 0 0 0 4.8183593,6.140625 v 0.0059 H 21.746094 a 4.9903737,6.144813 0 0 0 0.0078,0 4.9903737,6.144813 0 0 0 4.992188,-6.148437 4.9903737,6.144813 0 0 0 -4.992188,-6.1445315 4.9903737,6.144813 0 0 0 -0.144531,0.00586 H 7.6171875 a 4.9903737,6.144813 0 0 0 -0.1894531,-0.0059 z M 7.859375,7.25 A 4.6795918,5.5184016 0 0 1 8.0371094,7.25391 H 21.15625 A 4.6795918,5.5184016 0 0 1 21.292969,7.25 a 4.6795918,5.5184016 0 0 1 4.68164,5.519531 4.6795918,5.5184016 0 0 1 -4.68164,5.519531 4.6795918,5.5184016 0 0 1 -0.0059,0 H 7.6953125 v -0.0039 A 4.6795918,5.5184016 0 0 1 3.1777344,12.769531 4.6795918,5.5184016 0 0 1 7.859375,7.25 Z"
+           transform="scale(0.26458333)" />
+        <path
+           id="path28"
+           style="fill:#ffff00;fill-rule:evenodd;stroke-width:0.300458"
+           d="M 0.81287024,2.5853718 A 1.3203697,1.6258151 0 0 0 0.644405,3.3801552 1.3203697,1.6258151 0 0 0 1.9192627,5.0048622 v 0.00155 H 3.6871133 L 3.4871256,4.8379475 H 2.0360514 V 4.836914 A 1.238142,1.4600771 0 0 1 0.84077558,3.3775716 1.238142,1.4600771 0 0 1 0.97358397,2.7207641 Z" />
+        <path
+           id="path30"
+           style="fill:#00ffff;fill-rule:evenodd;stroke-width:0.300458"
+           d="M 6.1851625,1.8391202 6.0446026,1.9967334 a 1.238142,1.4600771 0 0 1 0.8211385,1.3751098 1.238142,1.4600771 0 0 1 -1.2386841,1.4603759 1.238142,1.4600771 0 0 1 -0.00155,0 H 3.5093568 L 3.3589784,5.0006843 h 2.3879679 a 1.3203697,1.6258151 0 0 0 0.00207,0 A 1.3203697,1.6258151 0 0 0 7.069863,3.3739104 1.3203697,1.6258151 0 0 0 6.1851625,1.8391202 Z" />
+      </g>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:1.38377px;line-height:0.45;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0324321"
+         x="1.5589695"
+         y="3.0899303"
+         id="text41"
+         transform="scale(0.89090193,1.122458)"><tspan
+           sodipodi:role="line"
+           id="tspan39"
+           x="1.5589695"
+           y="3.0899303"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:1.38377px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.0324321">+ SELL</tspan></text>
+    </g>
+  </g>
+</svg>

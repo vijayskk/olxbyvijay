@@ -1,25 +1,50 @@
-import logo from './logo.svg';
 import './App.css';
+import Header from './components/Header';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  withRouter,
+} from "react-router-dom";
+import Viewproduct from './components/Viewproduct';
+import Home from './components/Home';
+import Sellpage from './components/Sellpage';
+import Signup from './components/Signup';
+import Login from './components/Login';
+import { AuthProvoider } from './contexts/AuthContext';
+
 
 function App() {
+
   return (
+    <AuthProvoider>
+    <Router>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        
+        
+       
+      <main className="max-w-7xl mx-auto">
+
+        
+          <Switch>
+            <Route path="/product" component={Viewproduct} />
+            <Route path="/sell" component={Sellpage} />
+            <Route path="/signup" component={Signup} />
+            <Route path="/login" component={Login} />
+            <Route exact path="/" component={Home}>
+            
+
+            </Route>
+          </Switch>
+        
+
+       
+      </main>
     </div>
-  );
+    </Router>
+    </AuthProvoider>
+  ); 
 }
 
 export default App;
