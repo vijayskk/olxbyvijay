@@ -13,11 +13,15 @@ import Sellpage from './components/Sellpage';
 import Signup from './components/Signup';
 import Login from './components/Login';
 import { AuthProvoider } from './contexts/AuthContext';
-
-
+import {UserLocationProvider} from './contexts/UserLocation'
+import {SellerLocationProvider,SellerCoordsProvider} from './contexts/SellerLocation'
 function App() {
 
   return (
+
+    <UserLocationProvider>
+    <SellerLocationProvider>
+    <SellerCoordsProvider>
     <AuthProvoider>
     <Router>
     <div className="App">
@@ -26,24 +30,27 @@ function App() {
        
       <main className="max-w-7xl mx-auto">
 
-        
-          <Switch>
-            <Route path="/product" component={Viewproduct} />
-            <Route path="/sell" component={Sellpage} />
-            <Route path="/signup" component={Signup} />
-            <Route path="/login" component={Login} />
-            <Route exact path="/" component={Home}>
-            
 
-            </Route>
-          </Switch>
-        
+            <Switch>
+              <Route path="/product" component={Viewproduct} />
+              <Route path="/sell" component={Sellpage} />
+              <Route path="/signup" component={Signup} />
+              <Route path="/login" component={Login} />
+              <Route exact path="/" component={Home}>
 
-       
+
+              </Route>
+            </Switch>
+
+
+
       </main>
     </div>
     </Router>
     </AuthProvoider>
+    </SellerCoordsProvider>
+    </SellerLocationProvider>
+    </UserLocationProvider>
   ); 
 }
 

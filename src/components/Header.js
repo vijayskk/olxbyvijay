@@ -30,10 +30,10 @@ function Header() {
                 <SearchBox />
                {!currentUser?<button onClick={handleLogin} className="focus:outline-none font-extrabold underline md:mx-8 text-sm md:text-lg hidden md:inline">Login</button>:null }
                 {!currentUser?<button className="focus:outline-none font-extrabold underline md:mx-4 text-sm md:text-lg hidden md:inline" onClick={handleSignup}>Signup</button> :
-                <button onClick={()=>{logOut()}} className="focus:outline-none font-extrabold underline md:mx-8 text-sm md:text-lg hidden md:inline">Log Out</button>
+                <button onClick={()=>{logOut();handleLogin()}} className="focus:outline-none font-extrabold underline md:mx-8 text-sm md:text-lg hidden md:inline">Log Out</button>
                 }
                 <button onClick={handlehistory} className="hover:border-pink-600  font-bold md:mr-6 border-4 border-yellow-400 mx-2 md-mx-6 my-2 px-2 hidden md:inline rounded-3xl">SELL</button>
-                
+                    
                 
             </header>
             <div className="h-8 bottomhead  border-b border-gray-200 overflow-scroll items-center flex ">

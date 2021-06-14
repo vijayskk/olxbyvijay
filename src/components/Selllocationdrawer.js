@@ -1,24 +1,13 @@
 import React,{useState,useContext} from 'react'
 import ReactMapGL ,{Marker} from 'react-map-gl'
-import {SelectedLocation} from '../contexts/AppContext'
-import { UserLocation } from '../contexts/UserLocation';
+import {SellerLocation,SellerCoords} from '../contexts/SellerLocation'
 const axios = require('axios');
 
 
-function LocationDrawer({setdrawerview}) {
-    const got =(pos)=>{
-        console.log(pos);
-
-    }
-    const err = (err)=>{
-        console.error(err);
-    }
-    const getLocation =()=>{
-        navigator.geolocation.getCurrentPosition(got,err);
-    }
-    const setselectedlocation =  useContext(SelectedLocation)
+function Selllocationdrawer({setdrawerview , setselectedlocation}) {
     const [querydata, setquerydata] = useState("Search for the place");
-    const [usercoords, setusercoords] = useContext(UserLocation)
+    const [sellerlocation, setsellerlocation] = useContext(SellerLocation);
+    const [sellercoords, setsellercoords] = useContext(SellerCoords);
     const searchLocation = (word) =>{
         const apikey = "pk.eyJ1IjoidmlqYXlza2siLCJhIjoiY2twcWcxY283MzRmajJxbXdsa3FwODg3NiJ9.Uqv_gS4gAaCjXtMaaZ0jBg"
         axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${word}.json?autocomplete=true&types=place&access_token=${apikey}`).then((data)=>{
@@ -44,7 +33,7 @@ function LocationDrawer({setdrawerview}) {
         height:'40%',
         zoom : 10,
     })
-    return ( 
+    return (
         <>
         <div className="z-50 border-2 border-black rounded-md absolute top-10 w-60 h-64 bg-white overflow-y-scroll drawerscroll">
             <ReactMapGL mapStyle={"mapbox://styles/vijayskk/ckpqo11wo24jk17o3fqjdt5h3"} onViewportChange={(newviewport)=>{setviewport(newviewport)}} {...viewport} mapboxApiAccessToken={"pk.eyJ1IjoidmlqYXlza2siLCJhIjoiY2twcWcxY283MzRmajJxbXdsa3FwODg3NiJ9.Uqv_gS4gAaCjXtMaaZ0jBg"}>
@@ -71,7 +60,8 @@ function LocationDrawer({setdrawerview}) {
                         </svg>
                         <p className="cursor-pointer pl-2" onClick={()=>{
                             setselectedlocation(querydata)
-                            setusercoords([viewport.latitude , viewport.longitude])
+                            setsellerlocation(querydata)
+                            setsellercoords([viewport.latitude , viewport.longitude])
                             setdrawerview(false);
                         }}>{querydata}</p>
                         
@@ -89,4 +79,4 @@ function LocationDrawer({setdrawerview}) {
     )
 }
 
-export default LocationDrawer
+export default Selllocationdrawer

@@ -1,18 +1,17 @@
 import React from 'react'
 import {useState} from 'react'
-import LocationDrawer from './LocationDrawer';
-import {SelectedLocation} from '../contexts/AppContext'
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import IconButton from '@material-ui/core/IconButton';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
+import Selllocationdrawer from './Selllocationdrawer';
 
-function LocationPicker() {
+function Selllocationpicker() {
     
     const [selectedlocation, setselectedlocation] = useState("Select a Location")
     const [drawerview, setdrawerview] = useState(false)
- 
+    
     return (
-      <SelectedLocation.Provider value={setselectedlocation}>
+
        
      
         <div className="flex relative border-2 h-10 m-2 w-60 rounded-sm items-center  border-black" >
@@ -26,13 +25,11 @@ function LocationPicker() {
               {drawerview?<IconButton className="focus:outline-none" onClick={()=>{setdrawerview(false)}}><ArrowUpwardIcon /></IconButton>:null}
               
             </div>
-            
-            {drawerview?<LocationDrawer setdrawerview={setdrawerview}  />:null}
-            
+            {drawerview?<Selllocationdrawer setdrawerview={setdrawerview} setselectedlocation={setselectedlocation} />:null}
         </div>
        
-      </SelectedLocation.Provider>
+
     )
 }
 
-export default LocationPicker
+export default Selllocationpicker
