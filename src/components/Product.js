@@ -1,5 +1,6 @@
 
 import Currency from 'react-currency-formatter'
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import {
     BrowserRouter as Router,
     Switch,
@@ -7,32 +8,34 @@ import {
     Link,
   } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+import { ProductView } from '../contexts/ProductViewContext';
+import { useContext } from 'react';
 
-function Product({id,title,description,price,category,image}) {
+
+function Product({adId,itemname,price,category,date,description,image,coords,location,sellerphone,sellername,selleremail,selleraltphone,selleraddress}) {
+    const [productview, setproductview] = useContext(ProductView)
     let history = useHistory();
-  
-    
+    const handleviewpage = ()=>{
+        setproductview({adId,itemname,price,category,date,description,image,coords,location,sellerphone,sellername,selleremail,selleraltphone,selleraddress})
+        history.push(`/product`)
+    }
     return (
         <Router>
          
-        <div className="product" >
-            
-            <p className="absolute top-2 right-2 text-xs italic text-gray-500">{category}</p>
-            <img loading="lazy" className="mx-auto" src={image} width={200} />
+        <div className="product " onClick={handleviewpage}>
+            <div className="border relative border-gray-300 rounded-sm">
+                <div className="z-30 absolute bg-yellow-600 uppercase text-xs rounded-lg text-white p-1 left-2 top-2">featured</div>
+                <div className="absolute right-2 top-2 z-30"><FavoriteIcon style={{color:"#f51d5e"}} /></div>
+                <img className="mx-auto mt-5 mb-4" src={image[0]} alt="" width="200px"/>
 
-            <h4 className="my-3 text-xl">{title}</h4>
+                <div className="w-full h-auto border-l-8 rounded-lg border-yellow-500">
+                    <h1 className="ml-2 text-2xl font-extrabold">₹ {price}</h1>
+                    <h1 className="ml-2 font-normal text-lg truncate capitalize">{itemname}</h1>
+                    <h1 className="ml-2 line-clamp-1 font-light">{description}</h1>
+                    <h1 className="float-right pr-1 pb-1 pt-3 font-extralight ">{date}</h1>
 
-
-
-            <p className="text-xs my-2 line-clamp-2">{description}</p>
-            
-            <div className="mb-3" >
-            <Currency quantity={price*100} currency="INR" pattern="##,### !"  />
+                </div>
             </div>
-
-
-            <button onClick={()=>{history.push("/product")}} className="mt-auto button">Open</button>
-
         </div>
        
         </Router>

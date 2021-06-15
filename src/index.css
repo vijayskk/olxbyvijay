@@ -90,3 +90,8 @@ min-width: 0;
   .select-items div:hover, .same-as-selected {
     background-color: rgba(0, 0, 0, 0.1);
   }
+
+  .marker{
+    display: block;
+    
+  }

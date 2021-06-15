@@ -6,7 +6,7 @@ import { Carousel } from 'react-responsive-carousel';
 function Banner() {
     return (
         <div className="mt-2 max-w-screen-xl mx-auto">
-            <Carousel showThumbs={false} showStatus={false} emulateTouch={true} interval={2000} infiniteLoop={true} autoPlay={true}>
+            <Carousel stopOnHover={false} showThumbs={false} showStatus={false} emulateTouch={true} interval={2000} infiniteLoop={true} autoPlay={true}>
                 <div>
                     <img src="banner1.png" alt="imagehere" />
                    

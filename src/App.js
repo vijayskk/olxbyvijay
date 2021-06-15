@@ -15,10 +15,12 @@ import Login from './components/Login';
 import { AuthProvoider } from './contexts/AuthContext';
 import {UserLocationProvider} from './contexts/UserLocation'
 import {SellerLocationProvider,SellerCoordsProvider} from './contexts/SellerLocation'
+import {ProductViewProvider} from './contexts/ProductViewContext'
+
 function App() {
 
   return (
-
+    <ProductViewProvider>
     <UserLocationProvider>
     <SellerLocationProvider>
     <SellerCoordsProvider>
@@ -51,6 +53,7 @@ function App() {
     </SellerCoordsProvider>
     </SellerLocationProvider>
     </UserLocationProvider>
+    </ProductViewProvider>
   ); 
 }
 
