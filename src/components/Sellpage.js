@@ -10,6 +10,7 @@ import{ init } from 'emailjs-com';
 import { useForm } from 'react-hook-form'
 import firebase,{storage} from '../firebase'
 import { Carousel } from 'react-responsive-carousel';
+import { UserLocation } from '../contexts/UserLocation';
 
 
 
@@ -34,6 +35,7 @@ function Sellpage() {
     const [image1, setimage1] = useState()
     const [image2, setimage2] = useState()
     const [image3, setimage3] = useState()
+    const [image4, setimage4] = useState()
     const [sellbtnstate, setsellbtnstate] = useState(true)
     if (!currentUser) {
         history.push('/login')
@@ -76,23 +78,31 @@ function Sellpage() {
             var dd = String(today.getDate()).padStart(2, '0');
             var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
             var yyyy = today.getFullYear();
-            var images = []
+            var firstimage
+            var secondimage
+            var thirdimage
+            var fourthimage
             today = mm + '/' + dd + '/' + yyyy;
             adId = otpGenerator.generate(10, { upperCase: false, specialChars: false, alphabets:false });
             try {
                 await storage.ref(`images/${adId}first.jpg`).put(image1).then(({ref})=>{
                     ref.getDownloadURL().then((url)=>{
-                        images = [...images,url]
+                        firstimage = url
                     })
                 });
                 await storage.ref(`images/${adId}second.jpg`).put(image2).then(({ref})=>{
                     ref.getDownloadURL().then((url)=>{
-                        images = [...images,url]
+                        secondimage = url
                     })
                 });
                 await storage.ref(`images/${adId}third.jpg`).put(image3).then(({ref})=>{
                     ref.getDownloadURL().then((url)=>{
-                        images = [...images,url]
+                        thirdimage= url
+                    })
+                });
+                await storage.ref(`images/${adId}fourth.jpg`).put(image4).then(({ref})=>{
+                    ref.getDownloadURL().then((url)=>{
+                        fourthimage= url
                     })
                 });
             } catch (error) {
@@ -108,13 +118,14 @@ function Sellpage() {
                 description:data.description,
                 location:sellerlocation,
                 coords:sellercoords,
+                selleraccount:currentUser.email,
                 selleremail: confirmedemail,
                 sellername:data.sellername,
                 sellerphone:data.sellerphone,
                 selleraltphone:data.selleraltphone,
                 selleraddress:data.selleraddress,
                 createdDate: today,
-                images:images
+                images:[firstimage,secondimage]
             }
             console.log(adData);
             try {
@@ -147,10 +158,7 @@ function Sellpage() {
                                         <img src={image2?URL.createObjectURL(image2):"noimage.png"} alt="imagehere" width="550px" height="300px" />
 
                                     </div>
-                                    <div>
-                                        <img src={image3?URL.createObjectURL(image3):"noimage.png"} alt="imagehere" width="550px" height="300px" />
 
-                                    </div>
                         </Carousel>
                     </div>
                     <div className="h-20 items-center flex w-full absolute bottom-0 border-2 border-black rounded-2xl">
@@ -159,17 +167,13 @@ function Sellpage() {
                             setimage1(e.target.files[0])
                             
                         }}/>
-                        <div className="  w-1/3 flex h-full items-center "><label className="mx-auto bg-blue-600 p-2 rounded-2xl text-white" htmlFor="image1">{image1state}</label></div>
+                        <div className="  w-1/2 flex h-full items-center "><label className="mx-auto bg-blue-600 p-2 rounded-2xl text-white" htmlFor="image1">{image1state}</label></div>
                         <input type="file" id="image2" hidden onChange={(e)=>{
                             setimage2state("🏁Uploaded")
                             setimage2(e.target.files[0])
                         }}/>
-                        <div className="  w-1/3 flex h-full items-center "><label className="mx-auto bg-blue-600 p-2 rounded-2xl text-white" htmlFor="image2">{image2state}</label></div>
-                        <input type="file" id="image3" hidden onChange={(e)=>{
-                            setimage3state("🏁Uploaded")
-                            setimage3(e.target.files[0])
-                        }}/>
-                        <div className="  w-1/3 flex h-full items-center "><label className="mx-auto bg-blue-600 p-2 rounded-2xl text-white" htmlFor="image3">{image3state}</label></div>
+                        <div className="  w-1/2 flex h-full items-center "><label className="mx-auto bg-blue-600 p-2 rounded-2xl text-white" htmlFor="image2">{image2state}</label></div>
+                       
                     </div>
                 </div>
                 <div className="h-96 md:w-1/2  " >

@@ -20,6 +20,9 @@ function Header() {
     const handleLogin = () =>{
         history.push('/login')
     }
+    const handleMyads = () =>{
+        history.push('/myads')
+    }
 
     return (
 
@@ -28,7 +31,9 @@ function Header() {
             <img className="md:ml-6 h-10 pr-2 md:mr-2 ml-2 " src = "olx-logo-new.png" alt="OLX" onClick={handlehome}/>
                 <LocationPicker />
                 <SearchBox />
-               {!currentUser?<button onClick={handleLogin} className="focus:outline-none font-extrabold underline md:mx-8 text-sm md:text-lg hidden md:inline">Login</button>:null }
+               {!currentUser?<button onClick={handleLogin} className="focus:outline-none font-extrabold underline md:mx-8 text-sm md:text-lg hidden md:inline">Login</button>:
+               <button onClick={handleMyads} className="focus:outline-none font-extrabold underline md:mx-8 text-sm md:text-lg hidden md:inline">Myads</button>
+               }
                 {!currentUser?<button className="focus:outline-none font-extrabold underline md:mx-4 text-sm md:text-lg hidden md:inline" onClick={handleSignup}>Signup</button> :
                 <button onClick={()=>{logOut();handleLogin()}} className="focus:outline-none font-extrabold underline md:mx-8 text-sm md:text-lg hidden md:inline">Log Out</button>
                 }

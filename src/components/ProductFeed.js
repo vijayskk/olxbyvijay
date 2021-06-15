@@ -25,6 +25,7 @@ function ProductFeed() {
                         
                         <Product
                             key={obj.id}
+                            fbid={obj.id}
                             adId={obj.adId}
                             itemname={obj.name}
                             price={obj.price}
@@ -39,6 +40,7 @@ function ProductFeed() {
                             selleremail={obj.selleremail}
                             selleraltphone={obj.selleraltphone}
                             selleraddress={obj.selleraddress}
+                            selleraccount={obj.selleraccount}
                         />
                             
                     )

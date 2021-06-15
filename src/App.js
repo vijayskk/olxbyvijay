@@ -16,6 +16,7 @@ import { AuthProvoider } from './contexts/AuthContext';
 import {UserLocationProvider} from './contexts/UserLocation'
 import {SellerLocationProvider,SellerCoordsProvider} from './contexts/SellerLocation'
 import {ProductViewProvider} from './contexts/ProductViewContext'
+import Myads from './components/Myads';
 
 function App() {
 
@@ -36,6 +37,7 @@ function App() {
             <Switch>
               <Route path="/product" component={Viewproduct} />
               <Route path="/sell" component={Sellpage} />
+              <Route path="/myads" component={Myads} />
               <Route path="/signup" component={Signup} />
               <Route path="/login" component={Login} />
               <Route exact path="/" component={Home}>

@@ -12,11 +12,11 @@ import { ProductView } from '../contexts/ProductViewContext';
 import { useContext } from 'react';
 
 
-function Product({adId,itemname,price,category,date,description,image,coords,location,sellerphone,sellername,selleremail,selleraltphone,selleraddress}) {
+function Product({fbid,adId,itemname,price,category,date,description,image,coords,location,sellerphone,sellername,selleremail,selleraltphone,selleraddress,selleraccount}) {
     const [productview, setproductview] = useContext(ProductView)
     let history = useHistory();
     const handleviewpage = ()=>{
-        setproductview({adId,itemname,price,category,date,description,image,coords,location,sellerphone,sellername,selleremail,selleraltphone,selleraddress})
+        setproductview({fbid,adId,itemname,price,category,date,description,image,coords,location,sellerphone,sellername,selleremail,selleraltphone,selleraddress,selleraccount})
         history.push(`/product`)
     }
     return (

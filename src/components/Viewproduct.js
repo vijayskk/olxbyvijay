@@ -9,7 +9,7 @@ import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import ReactMapGL ,{Marker} from 'react-map-gl'
 import LocationSearchingIcon from '@material-ui/icons/LocationSearching';
 import { useEffect } from 'react';
-import firebase from '../firebase'
+import firebase, { storage } from '../firebase'
 import { idText } from 'typescript';
 import { useContext } from 'react';
 import { ProductView } from '../contexts/ProductViewContext';
@@ -18,12 +18,33 @@ function Viewproduct() {
         alert("Are you sure?")
     }
     const [productview, setproductview] = useContext(ProductView)
+    console.log(productview.fbid);
     const history = useHistory()
+    const [deleteerror, setdeleteerror] = useState("")
     const handlelogin = () =>{
         history.push('/login')
     }
     const handlehome = () =>{
         history.push('/')
+    }
+    const handleDelete = async()=>{
+        setdeleteerror("Deleting..please wait.")
+        try {
+            await storage.ref().child(`images/${productview.adId}first.jpg`).delete();
+            await storage.ref().child(`images/${productview.adId}third.jpg`).delete();
+            await storage.ref().child(`images/${productview.adId}fourth.jpg`).delete();
+            await storage.ref().child(`images/${productview.adId}second.jpg`).delete().then(()=>{
+                firebase.firestore().collection("ads").doc(productview.fbid).delete().then(()=>{
+                    handlehome();
+                })
+            })
+
+
+        } catch (error) {
+            console.log(error);
+            setdeleteerror("Oops...cant delete")
+        }
+
     }
     const {currentUser} = useAuth()
     const [viewport, setviewport] = useState({
@@ -37,8 +58,8 @@ function Viewproduct() {
             <>
             <Header />
             <div className="w-full">
-                <div className="flex">
-                    <div className="h-76 w-1/2 m-2 bg-gray-200">
+                <div className="inline md:flex">
+                    <div className=" md:h-76 w-full md:w-1/2 m-2 bg-gray-200">
                         <Carousel dynamicHeight={false} stopOnHover={false} preventMovementUntilSwipeScrollTolerance={false} showThumbs={true} showStatus={false} emulateTouch={true} interval={1100} infiniteLoop={true} autoPlay={false}>
                                             <div>
                                                 <img src={productview.image[0]?productview.image[0]:'noimage.png'} alt="Not Found"   />
@@ -48,13 +69,10 @@ function Viewproduct() {
                                                 <img src={productview.image[1]?productview.image[1]:'noimage.png'} alt="Not Found"  />
     
                                             </div>
-                                            <div>
-                                                <img src={productview.image[2]?productview.image[2]:'noimage.png'} alt="Not Found"  />
-    
-                                            </div>
+ 
                         </Carousel>
-                        </div>
-                        <div className="h-96 w-1/3 m-2 " >
+                    </div>
+                        <div className="h-96 md:w-1/3 m-2 " >
                             <div className="relative border border-gray-400 p-4 mb-2">
                                 <h1 className="text-2xl font-bold">₹ {productview.price}</h1>
                                 <h1 className=" font-normal text-lg truncate capitalize">{productview.itemname}</h1>
@@ -62,6 +80,15 @@ function Viewproduct() {
                                 <h1 className="absolute bottom-4 left-4 font-extralight">{productview.location}</h1>
                                 <h1 className="absolute bottom-4 right-4 font-extralight">{productview.date}</h1>
                             </div>
+
+                            <div className="relative border block md:hidden border-gray-400 p-4 mb-2">
+
+                                    <h1 className="text-2xl font-bold">Description</h1>
+                                    <p>{productview.description}</p>
+
+                            </div>
+
+
                             <div className="relative border border-gray-400 p-4 mb-2">
                                 <h1 className="text-2xl" >Seller Information</h1>
                                 <div className="pt-2 flex items-center"><Avatar className="mr-2">{productview.selleremail[0]}</Avatar>{productview.sellername}</div>
@@ -83,6 +110,17 @@ function Viewproduct() {
                                     <ReactMapGL mapStyle={"mapbox://styles/vijayskk/ckpqo11wo24jk17o3fqjdt5h3"} {...viewport} latitude={productview.coords[0]} longitude={productview.coords[1]} mapboxApiAccessToken={"pk.eyJ1IjoidmlqYXlza2siLCJhIjoiY2twcWcxY283MzRmajJxbXdsa3FwODg3NiJ9.Uqv_gS4gAaCjXtMaaZ0jBg"} />
                                 </div>
                             </div>
+
+                            <div className="relative border block md:hidden border-gray-400 p-4 mb-2">
+
+                                <h1 className="text-2xl font-bold">Delete ad</h1>
+                                <p>You own this ad.so you can delete it if needed.To delete the ad please click the button below</p>
+                                {deleteerror}
+                                <button onClick={handleDelete} className="w-full bg-red-500 focus:outline-none text-white text-lg py-1 mt-2 rounded-lg hover:bg-red-600">Delete ad</button>
+
+                            </div>
+
+
                             <div className="w-full mb-10 relative">
                                 <h1 className="text-lg  font-bold">AD ID {productview.adId}</h1>
                                 <button className="absolute -mt-6 float-right focus:outline-none right-0" variant="primary">REPORT THIS AD</button>
@@ -91,10 +129,18 @@ function Viewproduct() {
     
                         </div>
                     </div>
-                    <div className="w-1/2 m-2  ">
+                    <div className="w-1/2 m-2 hidden md:block ">
                         <div className="relative border border-gray-400 p-4 mb-2">
                             <h1 className="text-2xl font-bold">Description</h1>
                             <p>{productview.description}</p>
+                        </div>
+                    </div>
+                    <div className="w-1/2 m-2 hidden md:block ">
+                        <div className="relative border border-gray-400 p-4 mb-2">
+                            <h1 className="text-2xl font-bold">Delete ad</h1>
+                            <p>You own this ad.so you can delete it if needed.To delete the ad please click the button below</p>
+                            {deleteerror}
+                            <button onClick={handleDelete} className="w-full bg-red-500 focus:outline-none text-white text-lg py-1 mt-2 rounded-lg hover:bg-red-600">Delete ad</button>
                         </div>
                     </div>
     
