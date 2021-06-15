@@ -14,22 +14,26 @@ import { idText } from 'typescript';
 import { useContext } from 'react';
 import { ProductView } from '../contexts/ProductViewContext';
 function Viewproduct() {
-    
+    window.onbeforeunload = function() {
+        alert("Are you sure?")
+    }
     const [productview, setproductview] = useContext(ProductView)
     const history = useHistory()
     const handlelogin = () =>{
         history.push('/login')
     }
+    const handlehome = () =>{
+        history.push('/')
+    }
     const {currentUser} = useAuth()
     const [viewport, setviewport] = useState({
-        latitude: productview.coords[0],
-        longitude: productview.coords[1],
         width: '100%',
         height:'100%',
         zoom : 10,
     })  
+    if (!(productview === "nodata")) {
 
-     return (
+        return (
             <>
             <Header />
             <div className="w-full">
@@ -76,7 +80,7 @@ function Viewproduct() {
                                 <h1 className="text-2xl" >Posted In</h1>
                                 <h1 className="text-sm font-light pt-2" >{productview.location}</h1>
                                 <div className="z-40 relative pt-2 mb-4 rounded-xl w-full h-64 bg-white  ">
-                                    <ReactMapGL mapStyle={"mapbox://styles/vijayskk/ckpqo11wo24jk17o3fqjdt5h3"} {...viewport} mapboxApiAccessToken={"pk.eyJ1IjoidmlqYXlza2siLCJhIjoiY2twcWcxY283MzRmajJxbXdsa3FwODg3NiJ9.Uqv_gS4gAaCjXtMaaZ0jBg"} />
+                                    <ReactMapGL mapStyle={"mapbox://styles/vijayskk/ckpqo11wo24jk17o3fqjdt5h3"} {...viewport} latitude={productview.coords[0]} longitude={productview.coords[1]} mapboxApiAccessToken={"pk.eyJ1IjoidmlqYXlza2siLCJhIjoiY2twcWcxY283MzRmajJxbXdsa3FwODg3NiJ9.Uqv_gS4gAaCjXtMaaZ0jBg"} />
                                 </div>
                             </div>
                             <div className="w-full mb-10 relative">
@@ -97,6 +101,11 @@ function Viewproduct() {
             </div>
             </>
         )
+    }else{
+        handlehome();
+        return null
+    }
+
 
 }
 
