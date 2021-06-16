@@ -50,6 +50,7 @@ function Header() {
                 <p onClick={()=>{handlelogout();handleLogin()}} className="xl:ml-0 ml-4 mr-2 inline md:hidden text-base hover:text-gray-600 font-bold cursor-pointer">LogOut</p>
                 }
                 {!currentUser?<p className="xl:ml-0 ml-4 mr-2 inline md:hidden text-base hover:text-gray-600 font-bold cursor-pointer" onClick={handleSignup}>Signup</p>:null}
+                {currentUser?<p className="xl:ml-0 mr-6 ml-4 text-base hover:text-gray-600 font-bold cursor-pointer">{currentUser.displayName}</p>:null}
                 <p className="xl:ml-0 ml-4 text-base hover:text-gray-600 font-bold cursor-pointer">All</p>
                 <p className="mx-6 text-sm hover:text-gray-600 cursor-pointer">Cars</p>
                 <p className="mx-6 text-sm hover:text-gray-600 cursor-pointer">Motorcycles</p>

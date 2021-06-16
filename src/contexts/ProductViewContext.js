@@ -10,3 +10,14 @@ export const ProductViewProvider = (props)=>{
         </ProductView.Provider>
     )
 }
+
+export const Commentrefresh = createContext()
+
+export const CommentrefreshProvider = (props)=>{
+    const [commentrefresh, setcommentrefresh] = useState(1)
+    return (
+        <Commentrefresh.Provider value={[commentrefresh, setcommentrefresh]}>
+            {props.children}
+        </Commentrefresh.Provider>
+    )
+}

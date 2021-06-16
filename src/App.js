@@ -14,12 +14,13 @@ import Signup from './components/Signup';
 import Login from './components/Login';
 import {UserLocationProvider} from './contexts/UserLocation'
 import {SellerLocationProvider,SellerCoordsProvider} from './contexts/SellerLocation'
-import {ProductViewProvider} from './contexts/ProductViewContext'
+import {ProductViewProvider , CommentrefreshProvider} from './contexts/ProductViewContext'
 import Myads from './components/Myads';
 
 function App() {
 
   return (
+    <CommentrefreshProvider>
     <ProductViewProvider>
     <UserLocationProvider>
     <SellerLocationProvider>
@@ -53,6 +54,7 @@ function App() {
     </SellerLocationProvider>
     </UserLocationProvider>
     </ProductViewProvider>
+    </CommentrefreshProvider>
   ); 
 }
 

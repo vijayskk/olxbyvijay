@@ -13,6 +13,9 @@ import { idText } from 'typescript';
 import { useContext } from 'react';
 import { ProductView } from '../contexts/ProductViewContext';
 import {useAuthState} from 'react-firebase-hooks/auth'
+import Comments from './Comments';
+import Addcomment from './Addcomment';
+import { render } from '@testing-library/react';
 function Viewproduct() {
     const [user] = useAuthState(auth)
     window.onbeforeunload = function() {
@@ -50,38 +53,39 @@ function Viewproduct() {
         }
 
     }
+
     
     const [viewport, setviewport] = useState({
         width: '100%',
         height:'100%',
         zoom : 10,
     })
-    if (user.uid === productview.selleraccount) {
-        componentbig = <div className="w-1/2 m-2 hidden md:block ">
-                            <div className="relative border border-gray-400 p-4 mb-2">
+
+    
+    
+    if (!(productview === "nodata")) {
+        if (user.uid === productview.selleraccount) {
+            componentbig = <div className="w-1/2 m-2 hidden md:block ">
+                                <div className="relative border border-gray-400 p-4 mb-2">
+                                    <h1 className="text-2xl font-bold">Delete ad</h1>
+                                    <p>You own this ad.so you can delete it if needed.To delete the ad please click the button below</p>
+                                    {deleteerror}
+                                    <button onClick={handleDelete} className="w-full bg-red-500 focus:outline-none text-white text-lg py-1 mt-2 rounded-lg hover:bg-red-600">Delete ad</button>
+                                </div>
+                            </div>
+    
+            componentsmall =  <div className="relative border block md:hidden border-gray-400 p-4 mb-2">
+    
                                 <h1 className="text-2xl font-bold">Delete ad</h1>
                                 <p>You own this ad.so you can delete it if needed.To delete the ad please click the button below</p>
                                 {deleteerror}
                                 <button onClick={handleDelete} className="w-full bg-red-500 focus:outline-none text-white text-lg py-1 mt-2 rounded-lg hover:bg-red-600">Delete ad</button>
+    
                             </div>
-                        </div>
-
-        componentsmall =  <div className="relative border block md:hidden border-gray-400 p-4 mb-2">
-
-                            <h1 className="text-2xl font-bold">Delete ad</h1>
-                            <p>You own this ad.so you can delete it if needed.To delete the ad please click the button below</p>
-                            {deleteerror}
-                            <button onClick={handleDelete} className="w-full bg-red-500 focus:outline-none text-white text-lg py-1 mt-2 rounded-lg hover:bg-red-600">Delete ad</button>
-
-                        </div>
-    }else{
-        componentsmall = null;
-        componentbig = null;
-    }
-    
-    
-    if (!(productview === "nodata")) {
-
+        }else{
+            componentsmall = null;
+            componentbig = null;
+        }
         return (
             <>
             <Header />
@@ -100,7 +104,7 @@ function Viewproduct() {
  
                         </Carousel>
                     </div>
-                        <div className="h-96 md:w-1/3 m-2 " >
+                        <div className="h-96 md:w-1/2 ml-4 m-2 " >
                             <div className="relative border border-gray-400 p-4 mb-2">
                                 <h1 className="text-2xl font-bold">₹ {productview.price}</h1>
                                 <h1 className=" font-normal text-lg truncate capitalize">{productview.itemname}</h1>
@@ -142,9 +146,9 @@ function Viewproduct() {
                             {componentsmall}
 
 
-                            <div className="w-full mb-10 relative">
+                            <div className="w-full ml-2 mb-10 relative">
                                 <h1 className="text-lg  font-bold">AD ID {productview.adId}</h1>
-                                <button className="absolute -mt-6 float-right focus:outline-none right-0" variant="primary">REPORT THIS AD</button>
+                                <button className="absolute -mt-6 float-right focus:outline-none right-2" variant="primary">REPORT THIS AD</button>
                             </div>
                             
     
@@ -157,8 +161,8 @@ function Viewproduct() {
                         </div>
                     </div>
                     {componentbig}
-
-
+                    {(user && user.uid !== productview.selleraccount)?<Addcomment adId={productview.adId}  />:null}
+                    {user?<Comments adId={productview.adId} selleraccount={productview.selleraccount} />:null}
             </div>
             </>
         )
