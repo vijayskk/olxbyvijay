@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react'
 import Header from './Header'
-import {useAuth } from '../contexts/AuthContext'
 import { BrowserRouter as Router,useHistory} from 'react-router-dom' 
 import Selllocationpicker from './Selllocationpicker';
 import {SellerCoords,SellerLocation} from '../contexts/SellerLocation'
@@ -8,19 +7,19 @@ import Button from '@material-ui/core/Button';
 import emailjs from 'emailjs-com'
 import{ init } from 'emailjs-com';
 import { useForm } from 'react-hook-form'
-import firebase,{storage} from '../firebase'
+import firebase,{storage,auth} from '../firebase'
 import { Carousel } from 'react-responsive-carousel';
 import { UserLocation } from '../contexts/UserLocation';
-
+import {useAuthState} from 'react-firebase-hooks/auth'
 
 
 init("user_fm349qWlPJEXaS89wDWdN");
 var otpGenerator = require('otp-generator')
 function Sellpage() {
     var adId
+    const [user] = useAuthState(auth)
     const { register, handleSubmit } = useForm();
     const history = useHistory();
-    const {currentUser , logOut} = useAuth()
     const [sellerlocation, setsellerlocation] = useContext(SellerLocation);
     const [sellercoords, setsellercoords] = useContext(SellerCoords);
     const [selleremail, setselleremail] = useState()
@@ -37,7 +36,7 @@ function Sellpage() {
     const [image3, setimage3] = useState()
     const [image4, setimage4] = useState()
     const [sellbtnstate, setsellbtnstate] = useState(true)
-    if (!currentUser) {
+    if (!user) {
         history.push('/login')
     }
     const getCode = () =>{
@@ -118,7 +117,7 @@ function Sellpage() {
                 description:data.description,
                 location:sellerlocation,
                 coords:sellercoords,
-                selleraccount:currentUser.email,
+                selleraccount:user.uid,
                 selleremail: confirmedemail,
                 sellername:data.sellername,
                 sellerphone:data.sellerphone,

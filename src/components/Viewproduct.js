@@ -3,19 +3,20 @@ import React, { useState } from 'react'
 import { Carousel } from 'react-responsive-carousel'
 import Header from './Header'
 import CallIcon from '@material-ui/icons/Call';
-import {useAuth } from '../contexts/AuthContext'
 import { useHistory } from 'react-router-dom'
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import ReactMapGL ,{Marker} from 'react-map-gl'
 import LocationSearchingIcon from '@material-ui/icons/LocationSearching';
 import { useEffect } from 'react';
-import firebase, { storage } from '../firebase'
+import firebase, { storage ,auth} from '../firebase'
 import { idText } from 'typescript';
 import { useContext } from 'react';
 import { ProductView } from '../contexts/ProductViewContext';
+import {useAuthState} from 'react-firebase-hooks/auth'
 function Viewproduct() {
+    const [user] = useAuthState(auth)
     window.onbeforeunload = function() {
-        alert("Are you sure?")
+        alert("Are you sure?") 
     }
     const [productview, setproductview] = useContext(ProductView)
     console.log(productview.fbid);
@@ -27,6 +28,9 @@ function Viewproduct() {
     const handlehome = () =>{
         history.push('/')
     }
+    var componentbig
+    var componentsmall
+
     const handleDelete = async()=>{
         setdeleteerror("Deleting..please wait.")
         try {
@@ -46,12 +50,36 @@ function Viewproduct() {
         }
 
     }
-    const {currentUser} = useAuth()
+    
     const [viewport, setviewport] = useState({
         width: '100%',
         height:'100%',
         zoom : 10,
-    })  
+    })
+    if (user.uid === productview.selleraccount) {
+        componentbig = <div className="w-1/2 m-2 hidden md:block ">
+                            <div className="relative border border-gray-400 p-4 mb-2">
+                                <h1 className="text-2xl font-bold">Delete ad</h1>
+                                <p>You own this ad.so you can delete it if needed.To delete the ad please click the button below</p>
+                                {deleteerror}
+                                <button onClick={handleDelete} className="w-full bg-red-500 focus:outline-none text-white text-lg py-1 mt-2 rounded-lg hover:bg-red-600">Delete ad</button>
+                            </div>
+                        </div>
+
+        componentsmall =  <div className="relative border block md:hidden border-gray-400 p-4 mb-2">
+
+                            <h1 className="text-2xl font-bold">Delete ad</h1>
+                            <p>You own this ad.so you can delete it if needed.To delete the ad please click the button below</p>
+                            {deleteerror}
+                            <button onClick={handleDelete} className="w-full bg-red-500 focus:outline-none text-white text-lg py-1 mt-2 rounded-lg hover:bg-red-600">Delete ad</button>
+
+                        </div>
+    }else{
+        componentsmall = null;
+        componentbig = null;
+    }
+    
+    
     if (!(productview === "nodata")) {
 
         return (
@@ -93,15 +121,15 @@ function Viewproduct() {
                                 <h1 className="text-2xl" >Seller Information</h1>
                                 <div className="pt-2 flex items-center"><Avatar className="mr-2">{productview.selleremail[0]}</Avatar>{productview.sellername}</div>
                                 <div className="pt-3 flex items-center"><CallIcon className="mx-2" />
-                                    {currentUser ? <p>+91 {productview.sellerphone}</p> : <p>+91 xxxxx-xxxxx</p>}
+                                    {user ? <p>+91 {productview.sellerphone}</p> : <p>+91 xxxxx-xxxxx</p>}
                                 </div>
                                 <div className="pt-3 flex items-center"><CallIcon className="mx-2" />
-                                    {currentUser ? <p>+91 {productview.selleraltphone}</p> : <p>+91 xxxxx-xxxxx</p>}
+                                    {user ? <p>+91 {productview.selleraltphone}</p> : <p>+91 xxxxx-xxxxx</p>}
                                 </div>
                                 <div className="pt-3 flex items-center"><MailOutlineIcon className="mx-2" />
-                                    {currentUser ? <p>{productview.selleremail}</p> : null}
+                                    {user ? <p>{productview.selleremail}</p> : null}
                                 </div>
-                                {!currentUser ? <p className="pl-3 pt-2 italic hover:text-blue-500 cursor-pointer underline font-light" onClick={handlelogin}>Login to view</p> : null}
+                                {!user ? <p className="pl-3 pt-2 italic hover:text-blue-500 cursor-pointer underline font-light" onClick={handlelogin}>Login to view</p> : null}
                             </div>
                             <div className="relative border border-gray-400 p-4 mb-2">
                                 <h1 className="text-2xl" >Posted In</h1>
@@ -111,14 +139,7 @@ function Viewproduct() {
                                 </div>
                             </div>
 
-                            <div className="relative border block md:hidden border-gray-400 p-4 mb-2">
-
-                                <h1 className="text-2xl font-bold">Delete ad</h1>
-                                <p>You own this ad.so you can delete it if needed.To delete the ad please click the button below</p>
-                                {deleteerror}
-                                <button onClick={handleDelete} className="w-full bg-red-500 focus:outline-none text-white text-lg py-1 mt-2 rounded-lg hover:bg-red-600">Delete ad</button>
-
-                            </div>
+                            {componentsmall}
 
 
                             <div className="w-full mb-10 relative">
@@ -135,15 +156,9 @@ function Viewproduct() {
                             <p>{productview.description}</p>
                         </div>
                     </div>
-                    <div className="w-1/2 m-2 hidden md:block ">
-                        <div className="relative border border-gray-400 p-4 mb-2">
-                            <h1 className="text-2xl font-bold">Delete ad</h1>
-                            <p>You own this ad.so you can delete it if needed.To delete the ad please click the button below</p>
-                            {deleteerror}
-                            <button onClick={handleDelete} className="w-full bg-red-500 focus:outline-none text-white text-lg py-1 mt-2 rounded-lg hover:bg-red-600">Delete ad</button>
-                        </div>
-                    </div>
-    
+                    {componentbig}
+
+
             </div>
             </>
         )

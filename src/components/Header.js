@@ -2,11 +2,11 @@ import React from 'react'
 import LocationPicker from './LocationPicker'
 import SearchBox from './SearchBox'
 import { BrowserRouter as Router,useHistory} from 'react-router-dom'
-import {useAuth } from '../contexts/AuthContext'
-
+import { useAuthState } from 'react-firebase-hooks/auth'
+import {auth} from '../firebase'
 
 function Header() {
-    const {currentUser , logOut} = useAuth()
+    const [currentUser] = useAuthState(auth)
     const history = useHistory();
     const handlehistory = () =>{
         history.push('/sell')
@@ -23,6 +23,9 @@ function Header() {
     const handleMyads = () =>{
         history.push('/myads')
     }
+    const handlelogout = () =>{
+        auth.signOut()
+    }
 
     return (
 
@@ -35,7 +38,7 @@ function Header() {
                <button onClick={handleMyads} className="focus:outline-none font-extrabold underline md:mx-8 text-sm md:text-lg hidden md:inline">Myads</button>
                }
                 {!currentUser?<button className="focus:outline-none font-extrabold underline md:mx-4 text-sm md:text-lg hidden md:inline" onClick={handleSignup}>Signup</button> :
-                <button onClick={()=>{logOut();handleLogin()}} className="focus:outline-none font-extrabold underline md:mx-8 text-sm md:text-lg hidden md:inline">Log Out</button>
+                <button onClick={()=>{handlelogout();handleLogin()}} className="focus:outline-none font-extrabold underline md:mx-8 text-sm md:text-lg hidden md:inline">Log Out</button>
                 }
                 <button onClick={handlehistory} className="hover:border-pink-600  font-bold md:mr-6 border-4 border-yellow-400 mx-2 md-mx-6 my-2 px-2 hidden md:inline rounded-3xl">SELL</button>
                     
@@ -44,7 +47,7 @@ function Header() {
             <div className="h-8 bottomhead  border-b border-gray-200 overflow-scroll items-center flex ">
                 <p className="xl:ml-0 ml-4 mr-2 inline md:hidden text-base hover:text-gray-600 font-bold cursor-pointer" onClick={handlehistory}>Sell</p>
                 {!currentUser?<p onClick={handleLogin} className="xl:ml-0 ml-4 mr-2 inline md:hidden text-base hover:text-gray-600 font-bold cursor-pointer">Login</p>:
-                <p onClick={()=>{logOut()}} className="xl:ml-0 ml-4 mr-2 inline md:hidden text-base hover:text-gray-600 font-bold cursor-pointer">LogOut</p>
+                <p onClick={()=>{handlelogout();handleLogin()}} className="xl:ml-0 ml-4 mr-2 inline md:hidden text-base hover:text-gray-600 font-bold cursor-pointer">LogOut</p>
                 }
                 {!currentUser?<p className="xl:ml-0 ml-4 mr-2 inline md:hidden text-base hover:text-gray-600 font-bold cursor-pointer" onClick={handleSignup}>Signup</p>:null}
                 <p className="xl:ml-0 ml-4 text-base hover:text-gray-600 font-bold cursor-pointer">All</p>

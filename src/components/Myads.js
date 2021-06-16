@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import Header from './Header'
 import { useContext } from 'react'
-import {useAuth } from '../contexts/AuthContext'
-import firebase from '../firebase'
+import {useAuthState } from 'react-firebase-hooks/auth'
+import firebase,{auth} from '../firebase'
 import Product from './Product'
+
+
 function Myads() {
-    const {currentUser , logOut} = useAuth()
+    const [user] = useAuthState(auth)
     const [products, setproducts] = useState([])
     useEffect(()=>{
         firebase.firestore().collection('ads').get().then((snapshot)=>{
@@ -23,10 +25,12 @@ function Myads() {
         <>
         <Header />
         <h1>My Ads</h1>
+        {user.uid}
         <div className="grid grid-flow-row-dense md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  mx-auto">
             {
                 products.map((obj)=>{
-                    if (obj.selleraccount === currentUser.email) {
+                    if (obj.selleraccount === user.uid) {
+                        console.log(obj.selleraccount);
                         return (
                         
                             <Product

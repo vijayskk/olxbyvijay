@@ -12,7 +12,6 @@ import Home from './components/Home';
 import Sellpage from './components/Sellpage';
 import Signup from './components/Signup';
 import Login from './components/Login';
-import { AuthProvoider } from './contexts/AuthContext';
 import {UserLocationProvider} from './contexts/UserLocation'
 import {SellerLocationProvider,SellerCoordsProvider} from './contexts/SellerLocation'
 import {ProductViewProvider} from './contexts/ProductViewContext'
@@ -25,7 +24,6 @@ function App() {
     <UserLocationProvider>
     <SellerLocationProvider>
     <SellerCoordsProvider>
-    <AuthProvoider>
     <Router>
     <div className="App">
         
@@ -51,7 +49,6 @@ function App() {
       </main>
     </div>
     </Router>
-    </AuthProvoider>
     </SellerCoordsProvider>
     </SellerLocationProvider>
     </UserLocationProvider>
