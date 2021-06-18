@@ -16,7 +16,10 @@ import {useAuthState} from 'react-firebase-hooks/auth'
 import Comments from './Comments';
 import Addcomment from './Addcomment';
 import { render } from '@testing-library/react';
+import algoliasearch from 'algoliasearch';
 function Viewproduct() {
+    const client = algoliasearch("JQZ7F2IQ02","f44eaae76a180721482cf5357d12831f")
+    const index = client.initIndex('ads')
     const [user] = useAuthState(auth)
     window.onbeforeunload = function() {
         alert("Are you sure?") 
@@ -41,7 +44,8 @@ function Viewproduct() {
             await storage.ref().child(`images/${productview.adId}third.jpg`).delete();
             await storage.ref().child(`images/${productview.adId}fourth.jpg`).delete();
             await storage.ref().child(`images/${productview.adId}second.jpg`).delete().then(()=>{
-                firebase.firestore().collection("ads").doc(productview.fbid).delete().then(()=>{
+                firebase.firestore().collection("ads").doc(productview.fbid).delete().then((snap)=>{
+                    index.deleteObject(productview.fbid)
                     handlehome();
                 })
             })

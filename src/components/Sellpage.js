@@ -11,11 +11,15 @@ import firebase,{storage,auth} from '../firebase'
 import { Carousel } from 'react-responsive-carousel';
 import { UserLocation } from '../contexts/UserLocation';
 import {useAuthState} from 'react-firebase-hooks/auth'
+import algoliasearch from 'algoliasearch'
 
 
 init("user_fm349qWlPJEXaS89wDWdN");
 var otpGenerator = require('otp-generator')
 function Sellpage() {
+    const client = algoliasearch("JQZ7F2IQ02","f44eaae76a180721482cf5357d12831f")
+    const index = client.initIndex('ads')
+
     var adId
     const [user] = useAuthState(auth)
     const { register, handleSubmit } = useForm();
@@ -128,7 +132,11 @@ function Sellpage() {
             }
             console.log(adData);
             try {
-                firebase.firestore().collection('ads').add(adData).then(()=>{
+                firebase.firestore().collection('ads').add(adData).then((snap)=>{
+                    index.saveObject({
+                        objectID:snap.id,
+                        ...adData
+                    })
                     history.push('/')
                 }) 
             } catch (error) {
@@ -192,10 +200,11 @@ function Sellpage() {
                             <Selllocationpicker />
                             <select placeholder="Select an item" className="flex p-2 bg-white relative border-2 h-10 m-2 rounded-sm items-center flex-grow  border-black" name="" id="" required {...register("category")} >
                             <option value="notchose" default>Select a category</option>
-                                <option value="cars">Cars</option>
-                                <option value="bikes">Bikes</option>
-                                <option value="home appliances">Home Appliances</option>
-                                <option value="mobile">Mobile Phones</option>
+                                <option value="cars vehicles">Cars</option>
+                                <option value="bikes">Bikes</option>    
+                                <option value="scooter">Scooter</option>
+                                <option value="home">Home Appliances</option>
+                                <option value="mobile phones smartphones">Mobile Phones</option>
                                 <option value="electronics">Electronics</option>
                             </select>
                        

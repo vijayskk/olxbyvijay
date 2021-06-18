@@ -16,6 +16,7 @@ import {UserLocationProvider} from './contexts/UserLocation'
 import {SellerLocationProvider,SellerCoordsProvider} from './contexts/SellerLocation'
 import {ProductViewProvider , CommentrefreshProvider} from './contexts/ProductViewContext'
 import Myads from './components/Myads';
+import ResultPage from './components/ResultPage';
 
 function App() {
 
@@ -35,6 +36,7 @@ function App() {
 
             <Switch>
               <Route path="/product" component={Viewproduct} />
+              <Route path="/search" component={ResultPage} />
               <Route path="/sell" component={Sellpage} />
               <Route path="/myads" component={Myads} />
               <Route path="/signup" component={Signup} />

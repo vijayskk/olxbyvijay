@@ -95,3 +95,7 @@ min-width: 0;
     display: block;
     
   }
+
+.searchdraw::-webkit-scrollbar{
+  display: none;
+}
