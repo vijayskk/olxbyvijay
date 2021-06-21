@@ -17,6 +17,7 @@ import Comments from './Comments';
 import Addcomment from './Addcomment';
 import { render } from '@testing-library/react';
 import algoliasearch from 'algoliasearch';
+import Mailsection from './Mailsection';
 function Viewproduct() {
     const client = algoliasearch("JQZ7F2IQ02","f44eaae76a180721482cf5357d12831f")
     const index = client.initIndex('ads')
@@ -139,6 +140,7 @@ function Viewproduct() {
                                 </div>
                                 {!user ? <p className="pl-3 pt-2 italic hover:text-blue-500 cursor-pointer underline font-light" onClick={handlelogin}>Login to view</p> : null}
                             </div>
+                            <Mailsection productname={productview.itemname} adId={productview.adId} selleraccount={productview.selleraccount} sellername={productview.sellername} />
                             <div className="relative border border-gray-400 p-4 mb-2">
                                 <h1 className="text-2xl" >Posted In</h1>
                                 <h1 className="text-sm font-light pt-2" >{productview.location}</h1>

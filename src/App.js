@@ -17,6 +17,7 @@ import {SellerLocationProvider,SellerCoordsProvider} from './contexts/SellerLoca
 import {ProductViewProvider , CommentrefreshProvider} from './contexts/ProductViewContext'
 import Myads from './components/Myads';
 import ResultPage from './components/ResultPage';
+import Mymails from './components/Mymails';
 
 function App() {
 
@@ -38,6 +39,7 @@ function App() {
               <Route path="/product" component={Viewproduct} />
               <Route path="/search" component={ResultPage} />
               <Route path="/sell" component={Sellpage} />
+              <Route path="/mymails" component={Mymails} />
               <Route path="/myads" component={Myads} />
               <Route path="/signup" component={Signup} />
               <Route path="/login" component={Login} />

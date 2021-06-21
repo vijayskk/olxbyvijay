@@ -31,6 +31,9 @@ function Header() {
     const handlelogout = () =>{
         auth.signOut()
     }
+    const handlemymails = () =>{
+        history.push('/mymails')
+    }
     const handlecat = (term,cat)=>{
         setcommentrefresh(commentrefresh + 1)
         history.push(`/search?searchterm=${term}&category=${cat}`)
@@ -40,12 +43,15 @@ function Header() {
     return (
         <ProductViewProvider >
         <div>
-            <header className="flex h-16 items-center flex-grow xl:px-32 ">
+            <header className="flex h-16 items-center flex-grow  ">
             <img className="md:ml-6 h-10 pr-2 md:mr-2 ml-2 " src = "olx-logo-new.png" alt="OLX" onClick={handlehome}/>
                 <LocationPicker />
                 <AllSearchBox />
                {!currentUser?<button onClick={handleLogin} className="focus:outline-none font-extrabold underline md:mx-8 text-sm md:text-lg hidden md:inline">Login</button>:
+               <>
                <button onClick={handleMyads} className="focus:outline-none font-extrabold underline md:mx-8 text-sm md:text-lg hidden md:inline">Myads</button>
+               <button onClick={handlemymails} className="focus:outline-none font-extrabold underline md:mx-8 text-sm md:text-lg hidden md:inline">MyMails</button>
+               </>
                }
                 {!currentUser?<button className="focus:outline-none font-extrabold underline md:mx-4 text-sm md:text-lg hidden md:inline" onClick={handleSignup}>Signup</button> :
                 <button onClick={()=>{handlelogout();handleLogin()}} className="focus:outline-none font-extrabold underline md:mx-8 text-sm md:text-lg hidden md:inline">Log Out</button>
