@@ -18,6 +18,9 @@ import {ProductViewProvider , CommentrefreshProvider} from './contexts/ProductVi
 import Myads from './components/Myads';
 import ResultPage from './components/ResultPage';
 import Mymails from './components/Mymails';
+import MessengerCustomerChat from 'react-messenger-customer-chat';
+
+
 
 function App() {
 
@@ -52,6 +55,10 @@ function App() {
 
 
       </main>
+      <MessengerCustomerChat
+        pageId="105032348501540"
+        appId="390344595753306"
+      />,
     </div>
     </Router>
     </SellerCoordsProvider>

@@ -48,17 +48,14 @@ function Sellpage() {
         setsendbtnstatus(false)
         setInterval(()=>{setsendbtnstatus(true);},60000)
         var otp = otpGenerator.generate(6, { upperCase: false, specialChars: false, alphabets:false });       
-        setsellerOtp(otp)
-        console.log(otp);
-        setconfirmedemail(selleremail)
-        // emailjs.send("service_ododzue","template_huww71t",{
-        //     vcode: otp,
-        //     email: selleremail,
-        //     }).then(()=>{
-        //         setsellerOtp(otp)
-        //         setconfirmedemail(selleremail)
-        //         setemailsendstatus("Code Sent! Check your inbox and spambox")
-        //     })
+        emailjs.send("service_ododzue","template_huww71t",{
+            vcode: otp,
+            email: selleremail,
+            }).then(()=>{
+                setsellerOtp(otp)
+                setconfirmedemail(selleremail)
+                setemailsendstatus("Code Sent! Check your inbox and spambox")
+            })
 
     }   
     const onSubmit =async(data)=>{

@@ -9,7 +9,6 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 function Home() {
     const [user] = useAuthState(auth)
     const [usercoords,setusercoords] = useContext(UserLocation)
-    console.log(usercoords);
     var component
     if (user) {
      if (user.metadata.creationTime === user.metadata.lastSignInTime) {
@@ -24,7 +23,7 @@ function Home() {
             <Banner />
             {component}
             {/* ProductFeed */}
-            <ProductFeed />
+            <ProductFeed usercoords={usercoords} />
         </>
     )
 }

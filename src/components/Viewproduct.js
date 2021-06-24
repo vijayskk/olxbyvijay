@@ -1,4 +1,4 @@
-import { Avatar, Button } from '@material-ui/core'
+import { Avatar, Button, IconButton } from '@material-ui/core'
 import React, { useState } from 'react'
 import { Carousel } from 'react-responsive-carousel'
 import Header from './Header'
@@ -15,19 +15,21 @@ import { ProductView } from '../contexts/ProductViewContext';
 import {useAuthState} from 'react-firebase-hooks/auth'
 import Comments from './Comments';
 import Addcomment from './Addcomment';
-import { render } from '@testing-library/react';
 import algoliasearch from 'algoliasearch';
 import Mailsection from './Mailsection';
+import ReportAd from './ReportAd';
 function Viewproduct() {
+    const [user] = useAuthState(auth);
+    const history = useHistory();
+
     const client = algoliasearch("JQZ7F2IQ02","f44eaae76a180721482cf5357d12831f")
     const index = client.initIndex('ads')
-    const [user] = useAuthState(auth)
+    const [reportadbox, setreportadbox] = useState(false)
     window.onbeforeunload = function() {
         alert("Are you sure?") 
     }
     const [productview, setproductview] = useContext(ProductView)
     console.log(productview.fbid);
-    const history = useHistory()
     const [deleteerror, setdeleteerror] = useState("")
     const handlelogin = () =>{
         history.push('/login')
@@ -59,7 +61,7 @@ function Viewproduct() {
 
     }
 
-    
+
     const [viewport, setviewport] = useState({
         width: '100%',
         height:'100%',
@@ -67,8 +69,11 @@ function Viewproduct() {
     })
 
     
-    
-    if (!(productview === "nodata")) {
+    if (!user) {
+        history.push('/login')
+        return null
+    }
+    else if (!(productview === "nodata")) {
         if (user.uid === productview.selleraccount) {
             componentbig = <div className="w-1/2 m-2 hidden md:block ">
                                 <div className="relative border border-gray-400 p-4 mb-2">
@@ -154,7 +159,15 @@ function Viewproduct() {
 
                             <div className="w-full ml-2 mb-10 relative">
                                 <h1 className="text-lg  font-bold">AD ID {productview.adId}</h1>
-                                <button className="absolute -mt-6 float-right focus:outline-none right-2" variant="primary">REPORT THIS AD</button>
+                                <div className="absolute -mt-11  right-2"><IconButton onClick={()=>{setreportadbox(true)}} ><Button className=" focus:outline-none " variant="primary">REPORT THIS AD</Button></IconButton></div>
+                                <ReportAd  open={reportadbox} setOpen={setreportadbox}
+                                adId={productview.adId}
+                                productname={productview.itemname}
+                                fbid={productview.fbid}
+                                sellername={productview.sellername}
+                                selleremail={productview.selleremail}
+
+                                />
                             </div>
                             
     
