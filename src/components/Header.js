@@ -34,6 +34,9 @@ function Header() {
     const handlemymails = () =>{
         history.push('/mymails')
     }
+    const handlemylikes = () =>{
+        history.push('/mylikes')
+    }
     const handlecat = (term,cat)=>{
         setcommentrefresh(commentrefresh + 1)
         history.push(`/search?searchterm=${term}&category=${cat}`)
@@ -49,8 +52,9 @@ function Header() {
                 <AllSearchBox />
                {!currentUser?<button onClick={handleLogin} className="focus:outline-none font-extrabold underline md:mx-8 text-sm md:text-lg hidden md:inline">Login</button>:
                <>
-               <button onClick={handleMyads} className="focus:outline-none font-extrabold underline md:mx-8 text-sm md:text-lg hidden md:inline">Myads</button>
-               <button onClick={handlemymails} className="focus:outline-none font-extrabold underline md:mx-8 text-sm md:text-lg hidden md:inline">MyMails</button>
+               <button onClick={handleMyads} className="focus:outline-none font-extrabold underline md:mx-6 text-sm md:text-lg hidden md:inline">Myads</button>
+               <button onClick={handlemylikes} className="focus:outline-none font-extrabold underline md:mx-6 text-sm md:text-lg hidden md:inline">Mylikes</button>
+               <button onClick={handlemymails} className="focus:outline-none font-extrabold underline md:mx-6 text-sm md:text-lg hidden md:inline">MyMails</button>
                </>
                }
                 {!currentUser?<button className="focus:outline-none font-extrabold underline md:mx-4 text-sm md:text-lg hidden md:inline" onClick={handleSignup}>Signup</button> :

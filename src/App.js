@@ -20,6 +20,7 @@ import ResultPage from './components/ResultPage';
 import Mymails from './components/Mymails';
 import MessengerCustomerChat from 'react-messenger-customer-chat';
 import Welcome from './components/Welcome';
+import Mylikes from './components/Mylikes';
 
 
 
@@ -45,6 +46,7 @@ function App() {
               <Route path="/sell" component={Sellpage} />
               <Route path="/mymails" component={Mymails} />
               <Route path="/myads" component={Myads} />
+              <Route path="/mylikes" component={Mylikes} />
               <Route path="/signup" component={Signup} />
               <Route path="/login" component={Login} />
               <Route exact path="/" component={Home}>

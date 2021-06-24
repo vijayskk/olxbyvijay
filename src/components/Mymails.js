@@ -44,6 +44,7 @@ function Mymails() {
                     Refresh
                 </Fab>
             </div>
+            <h1 className="font-light text-xl md:text-4xl pt-4 ml-2" >Inbox</h1>
             <div>
                 {
                     mails.map((obj)=>{

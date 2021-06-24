@@ -1,4 +1,4 @@
-import { Avatar, Button, IconButton } from '@material-ui/core'
+import { Avatar, Button, Checkbox, FormControlLabel, IconButton } from '@material-ui/core'
 import React, { useState } from 'react'
 import { Carousel } from 'react-responsive-carousel'
 import Header from './Header'
@@ -6,10 +6,8 @@ import CallIcon from '@material-ui/icons/Call';
 import { useHistory } from 'react-router-dom'
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import ReactMapGL ,{Marker} from 'react-map-gl'
-import LocationSearchingIcon from '@material-ui/icons/LocationSearching';
 import { useEffect } from 'react';
 import firebase, { storage ,auth} from '../firebase'
-import { idText } from 'typescript';
 import { useContext } from 'react';
 import { ProductView } from '../contexts/ProductViewContext';
 import {useAuthState} from 'react-firebase-hooks/auth'
@@ -18,17 +16,32 @@ import Addcomment from './Addcomment';
 import algoliasearch from 'algoliasearch';
 import Mailsection from './Mailsection';
 import ReportAd from './ReportAd';
+import { FavoriteBorder } from '@material-ui/icons';
+import Favorite from '@material-ui/icons/Favorite';
+import fb from 'firebase'
 function Viewproduct() {
+    const [productview, setproductview] = useContext(ProductView)
     const [user] = useAuthState(auth);
-    const history = useHistory();
+    const [likedstate, setlikedstate] = useState(false)
+    useEffect(()=>{
+        firebase.firestore().collection(user.uid + "likes").get().then((snapshot)=>{
+            snapshot.docs.map((like)=>{
+                console.log(like.data());
+                if (like.data().adId === productview.adId) {
+                    setlikedstate(true)
+                }
+            })
 
+        })
+    },[])
+    const history = useHistory();
     const client = algoliasearch("JQZ7F2IQ02","f44eaae76a180721482cf5357d12831f")
     const index = client.initIndex('ads')
     const [reportadbox, setreportadbox] = useState(false)
     window.onbeforeunload = function() {
         alert("Are you sure?") 
     }
-    const [productview, setproductview] = useContext(ProductView)
+    
     console.log(productview.fbid);
     const [deleteerror, setdeleteerror] = useState("")
     const handlelogin = () =>{
@@ -121,6 +134,21 @@ function Viewproduct() {
                                 <h1 className=" line-clamp-1 font-light pb-12">{productview.description}</h1>
                                 <h1 className="absolute bottom-4 left-4 font-extralight">{productview.location}</h1>
                                 <h1 className="absolute bottom-4 right-4 font-extralight">{productview.date}</h1>
+                                <div className="absolute top-2 right-0">
+                                    <Checkbox checked={likedstate}  icon={<FavoriteBorder />} checkedIcon={<Favorite />} name="checkedH" onClick={(e)=>{
+                                        if (e.target.checked) {
+                                            setlikedstate(true)
+                                            firebase.firestore().collection(user.uid + "likes").add({
+                                                productname:productview.itemname,
+                                                image:productview.image,
+                                                adId: productview.adId,
+                                                timestamp: fb.firestore.FieldValue.serverTimestamp()
+                                            }).then(()=>{
+                                                console.log("liked");
+                                            })
+                                        }
+                                    }} />
+                                </div>
                             </div>
 
                             <div className="relative border block md:hidden border-gray-400 p-4 mb-2">

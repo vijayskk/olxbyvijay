@@ -10,16 +10,21 @@ function Myads() {
     const [user] = useAuthState(auth)
     const [products, setproducts] = useState([])
     useEffect(()=>{
-        firebase.firestore().collection('ads').get().then((snapshot)=>{
-            const allpost = snapshot.docs.map((product)=>{
-                return {
-                    ...product.data(),
-                    id:product.id
-                }
-            })
-            console.log(allpost); 
-            setproducts(allpost);
-        })
+        try {
+            firebase.firestore().collection('ads').get().then((snapshot)=>{
+                const allpost = snapshot.docs.map((product)=>{
+                    return {
+                        ...product.data(),
+                        id:product.id
+                    }
+                })
+                console.log(allpost); 
+                setproducts(allpost);
+            })   
+        } catch (error) {
+            console.log(error);
+        }
+
     },[])
     return (
         <>
