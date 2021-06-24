@@ -19,6 +19,7 @@ import Myads from './components/Myads';
 import ResultPage from './components/ResultPage';
 import Mymails from './components/Mymails';
 import MessengerCustomerChat from 'react-messenger-customer-chat';
+import Welcome from './components/Welcome';
 
 
 
@@ -35,7 +36,7 @@ function App() {
         
         
        
-      <main className="max-w-7xl mx-auto">
+      <main className="">
 
 
             <Switch>

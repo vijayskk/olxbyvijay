@@ -29,6 +29,7 @@ function Login() {
                      
                 </div>
                 <a onClick={handleSignup} className="italic ml-2 mb-2 pb-4 hover:text-blue-700 cursor-pointer">Create an Account?</a>
+                <button className="float-right mr-2 bg-blue-600 hover:bg-blue-500 px-4 py-2 text-white rounded-xl -mt-6 focus:outline-none" onClick={handleHome} >Skip Signin</button>
             </div>
         </div>
     )

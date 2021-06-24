@@ -99,7 +99,7 @@ function Viewproduct() {
         return (
             <>
             <Header />
-            <div className="w-full">
+            <div className="w-full max-w-7xl mx-auto">
                 <div className="inline md:flex">
                     <div className=" md:h-76 w-full md:w-1/2 m-2 bg-gray-200">
                         <Carousel dynamicHeight={false} stopOnHover={false} preventMovementUntilSwipeScrollTolerance={false} showThumbs={true} showStatus={false} emulateTouch={true} interval={1100} infiniteLoop={true} autoPlay={false}>

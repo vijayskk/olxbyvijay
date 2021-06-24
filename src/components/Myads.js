@@ -24,6 +24,8 @@ function Myads() {
     return (
         <>
         <Header />
+        <div className="max-w-7xl mx-auto">
+        
         <h1>My Ads</h1>
         {user.uid}
         <div className="grid grid-flow-row-dense md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  mx-auto">
@@ -61,6 +63,7 @@ function Myads() {
 
 
             
+        </div>
         </div>
         </>
     )

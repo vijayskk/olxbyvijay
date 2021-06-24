@@ -43,7 +43,7 @@ function Header() {
     return (
         <ProductViewProvider >
         <div>
-            <header className="flex h-16 items-center flex-grow  ">
+            <header className="max-w-7xl mx-auto flex h-16 items-center flex-grow  ">
             <img className="md:ml-6 h-10 pr-2 md:mr-2 ml-2 " src = "olx-logo-new.png" alt="OLX" onClick={handlehome}/>
                 <LocationPicker />
                 <AllSearchBox />
@@ -60,7 +60,7 @@ function Header() {
                     
                 
             </header>
-            <div className="h-8 bottomhead  border-b border-gray-200 overflow-scroll items-center flex ">
+            <div className="h-8 bottomhead max-w-7xl mx-auto border-b border-gray-200 overflow-scroll items-center flex ">
                 <p className="xl:ml-0 ml-4 mr-2 inline md:hidden text-base hover:text-gray-600 font-bold cursor-pointer" onClick={handlehistory}>Sell</p>
                 {!currentUser?<p onClick={handleLogin} className="xl:ml-0 ml-4 mr-2 inline md:hidden text-base hover:text-gray-600 font-bold cursor-pointer">Login</p>:
                 <p onClick={()=>{handlelogout();handleLogin()}} className="xl:ml-0 ml-4 mr-2 inline md:hidden text-base hover:text-gray-600 font-bold cursor-pointer">LogOut</p>

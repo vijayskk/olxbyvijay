@@ -33,8 +33,10 @@ function Mymails() {
         })
     },[mailrefresh])
     return (
+        <div className="max-w-7xl mx-auto">
+        <Header />
         <div>
-            <Header />
+            
             {mailloading?<LinearProgress />:null} 
             <div className="p-4 mb-2">
                 <Fab className="focus:outline-none" onClick={()=>{setmailrefresh(mailrefresh + 1)}} variant="extended">
@@ -76,6 +78,7 @@ function Mymails() {
 
 
             </div>
+        </div>
         </div>
     )
 }

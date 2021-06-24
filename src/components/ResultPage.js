@@ -53,6 +53,8 @@ function ResultPage() {
     return (
         <>
         <Header />
+        <div className="max-w-7xl mx-auto">
+        
         <FormControlLabel
         className="mt-4"
         control={
@@ -145,6 +147,7 @@ function ResultPage() {
 
                 
             </div>
+        </div>
         </div>
         </>
     )

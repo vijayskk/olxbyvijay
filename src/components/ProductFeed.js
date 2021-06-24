@@ -36,7 +36,7 @@ function ProductFeed({usercoords}) {
         return deg * (Math.PI/180)
       }
     return (
-        <>
+        <div className="max-w-7xl mx-auto">
         {!(usercoords[0] === 0 && usercoords[1] === 0)?<div className="bg-gray-200 mt-6 rounded-2xl" >
         <h1 className="text-4xl pl-4 pt-4">Deals near you</h1>    
         <div className="grid grid-flow-row-dense md:grid-cols-2 bg-gray-200 rounded-2xl lg:grid-cols-3 xl:grid-cols-4  mx-auto" >
@@ -114,7 +114,7 @@ function ProductFeed({usercoords}) {
 
             
         </div>
-        </>
+        </div>
     )
 }
 

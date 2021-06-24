@@ -147,6 +147,7 @@ function Sellpage() {
     return (
         <>
         <Header />
+        <div className="max-w-7xl mx-auto">
         <form onSubmit={handleSubmit(onSubmit)}>
         <h1 className="text-4xl uppercase p-2 pt-6 font-extrabold">Item Details</h1>
         <div className="w-full">
@@ -245,6 +246,7 @@ function Sellpage() {
         {formerror}
         <div className="w-full"><button disabled={!sellbtnstate} className="w-1/2 md:w-full mx-4 h-10 mb-10 text-2xl mt-10 text-white focus:outline-none bg-green-800">Sell</button></div>
         </form>
+        </div>
         </>
     )
 }
