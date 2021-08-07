@@ -1,9 +1,4 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-
-## This is a Development Repo Some things may be Failed
+# This is a Development Repo Some things may be Failed
 
 So please visit the result repository
 [Olx by vijay hosted](https://github.com/vijayskk/olxbyvijay-hosted.git).
