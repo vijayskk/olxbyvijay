@@ -34,7 +34,7 @@ function Addcomment({adId}) {
         })
     }
     return(
-        <div className="w-1/2 m-2  ">
+        <div className="w-full md:w-1/2 m-2  ">
             <div className="relative border border-gray-400 p-4 mb-2">
                 <h1 className="mb-2 text-2xl font-bold">Add a Comment?</h1>
                 <p>Here you can post a comment.Your name and comments are always visible to others. The seller can reply to it.</p>

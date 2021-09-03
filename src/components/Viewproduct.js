@@ -24,15 +24,18 @@ function Viewproduct() {
     const [user] = useAuthState(auth);
     const [likedstate, setlikedstate] = useState(false)
     useEffect(()=>{
-        firebase.firestore().collection(user.uid + "likes").get().then((snapshot)=>{
-            snapshot.docs.map((like)=>{
-                console.log(like.data());
-                if (like.data().adId === productview.adId) {
-                    setlikedstate(true)
-                }
+        if(user){
+            firebase.firestore().collection(user.uid + "likes").get().then((snapshot)=>{
+                snapshot.docs.map((like)=>{
+                    console.log(like.data());
+                    if (like.data().adId === productview.adId) {
+                        setlikedstate(true)
+                    }
+                })
+    
             })
 
-        })
+        }
     },[])
     const history = useHistory();
     const client = algoliasearch("JQZ7F2IQ02","f44eaae76a180721482cf5357d12831f")
@@ -210,6 +213,7 @@ function Viewproduct() {
                     {componentbig}
                     {(user && user.uid !== productview.selleraccount)?<Addcomment adId={productview.adId}  />:null}
                     {user?<Comments adId={productview.adId} selleraccount={productview.selleraccount} />:null}
+                <div/>
             </div>
             </>
         )

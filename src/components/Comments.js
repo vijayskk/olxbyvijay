@@ -24,7 +24,7 @@ function Comments({adId,selleraccount}) {
         })
     },[commentrefresh])
     return (
-        <div className="w-1/2 m-2  ">
+        <div className="w-full md:w-1/2 m-2  ">
         <div className="relative border min-h-full border-gray-400 p-4 mb-2">
             <h1 className="mb-4 text-2xl font-bold">Comments</h1>
             {
